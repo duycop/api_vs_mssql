@@ -1,0 +1,240 @@
+[
+    {
+        "id": "7e0a54f1d44dee4b",
+        "type": "tab",
+        "label": "json for 57kmt",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "17cc13a843bae0fc",
+        "type": "http in",
+        "z": "7e0a54f1d44dee4b",
+        "name": "",
+        "url": "/list_user",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "64b3a2fffcb315dc"
+            ]
+        ]
+    },
+    {
+        "id": "64b3a2fffcb315dc",
+        "type": "MSSQL",
+        "z": "7e0a54f1d44dee4b",
+        "mssqlCN": "b61ae8f75716026e",
+        "name": "list user",
+        "outField": "payload",
+        "returnType": 0,
+        "throwErrors": 1,
+        "query": "SP_User",
+        "modeOpt": "",
+        "modeOptType": "execute",
+        "queryOpt": "payload",
+        "queryOptType": "editor",
+        "paramsOpt": "",
+        "paramsOptType": "editor",
+        "rows": "rows",
+        "rowsType": "msg",
+        "parseMustache": true,
+        "params": [
+            {
+                "output": false,
+                "name": "action",
+                "type": "VarChar(50)",
+                "valueType": "str",
+                "value": "list_user",
+                "options": {
+                    "nullable": true,
+                    "primary": false,
+                    "identity": false,
+                    "readOnly": false
+                }
+            }
+        ],
+        "x": 320,
+        "y": 120,
+        "wires": [
+            [
+                "60c6eb8b4c126f10"
+            ]
+        ]
+    },
+    {
+        "id": "06c9b2234bd254b6",
+        "type": "http response",
+        "z": "7e0a54f1d44dee4b",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 630,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "60c6eb8b4c126f10",
+        "type": "change",
+        "z": "7e0a54f1d44dee4b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].list_user",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 120,
+        "wires": [
+            [
+                "06c9b2234bd254b6"
+            ]
+        ]
+    },
+    {
+        "id": "857458bdc731fcdb",
+        "type": "http in",
+        "z": "7e0a54f1d44dee4b",
+        "name": "",
+        "url": "/check_login",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 180,
+        "wires": [
+            [
+                "f026b3c202421763"
+            ]
+        ]
+    },
+    {
+        "id": "f026b3c202421763",
+        "type": "MSSQL",
+        "z": "7e0a54f1d44dee4b",
+        "mssqlCN": "b61ae8f75716026e",
+        "name": "list user",
+        "outField": "payload",
+        "returnType": 0,
+        "throwErrors": 1,
+        "query": "SP_User",
+        "modeOpt": "",
+        "modeOptType": "execute",
+        "queryOpt": "payload",
+        "queryOptType": "editor",
+        "paramsOpt": "",
+        "paramsOptType": "editor",
+        "rows": "rows",
+        "rowsType": "msg",
+        "parseMustache": true,
+        "params": [
+            {
+                "output": false,
+                "name": "action",
+                "type": "VarChar(50)",
+                "valueType": "str",
+                "value": "check_login",
+                "options": {
+                    "nullable": true,
+                    "primary": false,
+                    "identity": false,
+                    "readOnly": false
+                }
+            },
+            {
+                "output": false,
+                "name": "uid",
+                "type": "VarChar(50)",
+                "valueType": "msg",
+                "value": "payload.uid",
+                "options": {
+                    "nullable": true,
+                    "primary": false,
+                    "identity": false,
+                    "readOnly": false
+                }
+            },
+            {
+                "output": false,
+                "name": "pwd",
+                "type": "NVarChar(50)",
+                "valueType": "msg",
+                "value": "payload.pwd",
+                "options": {
+                    "nullable": true,
+                    "primary": false,
+                    "identity": false,
+                    "readOnly": false
+                }
+            }
+        ],
+        "x": 320,
+        "y": 180,
+        "wires": [
+            [
+                "070ed2b10bfc3456"
+            ]
+        ]
+    },
+    {
+        "id": "070ed2b10bfc3456",
+        "type": "change",
+        "z": "7e0a54f1d44dee4b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0].result",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 180,
+        "wires": [
+            [
+                "06c9b2234bd254b6"
+            ]
+        ]
+    },
+    {
+        "id": "b61ae8f75716026e",
+        "type": "MSSQL-CN",
+        "tdsVersion": "7_4",
+        "name": "sql của Cốp",
+        "server": "127.0.0.1",
+        "port": "49259",
+        "encyption": true,
+        "trustServerCertificate": true,
+        "database": "QLSV",
+        "useUTC": true,
+        "connectTimeout": "15000",
+        "requestTimeout": "15000",
+        "cancelTimeout": "5000",
+        "pool": "5",
+        "parseJSON": false,
+        "enableArithAbort": true,
+        "readOnlyIntent": false
+    }
+]
